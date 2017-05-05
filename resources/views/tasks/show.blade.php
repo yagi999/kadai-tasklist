@@ -8,7 +8,7 @@
 
     {!! link_to_route('tasks.edit', 'このタスクの編集', ['id' => $task->id]) !!}
     
-    {!! Form::model($message, ['route' => ['messages.destroy', $message->id], 'method' => 'delete']) !!}
+    {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除') !!}
     {!! Form::close() !!}
 
