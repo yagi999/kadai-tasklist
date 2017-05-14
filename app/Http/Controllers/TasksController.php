@@ -20,11 +20,15 @@ class TasksController extends Controller
     {
         $tasks = Task::all();
 
-        return view('tasks.index', [
+        return view('welcome', [
             'tasks' => $tasks,
         ]);
+        
+        
+        
     }
-
+    
+     
     /**
      * Show the form for creating a new resource.
      *
@@ -37,6 +41,7 @@ class TasksController extends Controller
         return view('tasks.create', [
             'task' => $task,
         ]);
+        
     }
 
     /**
