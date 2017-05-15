@@ -18,12 +18,19 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
-
-        return view('welcome', [
-            'tasks' => $tasks,
-        ]);
         
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+        }
+        return view('welcome', $data);
+    
         
         
     }
@@ -59,7 +66,9 @@ class TasksController extends Controller
         $task = new task;
         
         $task->content = $request->content;
-        $task->status = $request->status;
+        $user = \Auth::user();
+         $task->user_id = $user->id;
+         $task->status = $request->status;
         $task->save();
 
         return redirect('/');
